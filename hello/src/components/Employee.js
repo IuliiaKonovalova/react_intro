@@ -1,8 +1,15 @@
-function Employee() {
+function Employee(props) {
+  // props are in the parent component
   return (
-    <div>
-      <h3>Employee</h3>
-    </div>
+    <>
+      <h3>Employee {props.name}</h3>
+      <p>{props.role ? props.role : "No role"}</p>
+      {props.role ? (
+        <p className="role">Role: {props.role}</p>
+      ) : (
+        <p className="norole">No role</p>
+      )}
+    </>
   );
 }
 
