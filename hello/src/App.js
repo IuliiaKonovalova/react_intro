@@ -6,6 +6,7 @@ import image2 from './images/3d-fluency-businesswoman-1.png';
 import image3 from './images/3d-fluency-carrot.png';
 import image4 from './images/3d-fluency-cherry.png';
 import image5 from './images/3d-fluency-crab.png';
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
   const [ role, setRole ] = useState();
@@ -51,7 +52,7 @@ function App() {
           } />
           <div className="flex flex-wrap justify-center">
             {employees.map((employee) => {
-              return (<Employee name={employee.name} role={employee.role} img={employee.img} />)
+              return (<Employee key={uuidv4()} name={employee.name} role={employee.role} img={employee.img} />)
             })};
             </div> 
         </>
