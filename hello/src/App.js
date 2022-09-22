@@ -9,6 +9,34 @@ import image5 from './images/3d-fluency-crab.png';
 
 function App() {
   const [ role, setRole ] = useState();
+  const [employees, setEmployees] = useState([
+    {
+      name: 'John Doe',
+      role: 'CEO',
+      img: image1
+    },
+    {
+      name: 'Jane Doe',
+      role: 'CTO',
+      img: image2
+    },
+    {
+      name: 'Carrot',
+      role: 'CFO',
+      img: image3
+    },
+    {
+      name: 'Cherry',
+      role: 'CMO',
+      img: image4
+    },
+    {
+      name: 'Crab',
+      role: 'CIO',
+      img: image5
+    }
+  ]);
+
   const showEmployee = true;
   return (
     <div className="App bg-slate-200">
@@ -22,11 +50,9 @@ function App() {
 
           } />
           <div className="flex flex-wrap justify-center">
-            <Employee name='Julia' role='intern' img={image1}/> 
-            <Employee  name='Jane' role={role} img={image2}/> 
-            <Employee  name='Robert'  img={image3}/> 
-            <Employee name='Julia' role='intern' img={image4}/> 
-            <Employee  name='Jane' role={role}  img={image5}/> 
+            {employees.map((employee) => {
+              return (<Employee name={employee.name} role={employee.role} img={employee.img} />)
+            })};
             </div> 
         </>
       ): (
