@@ -7,6 +7,7 @@ import image3 from './images/3d-fluency-carrot.png';
 import image4 from './images/3d-fluency-cherry.png';
 import image5 from './images/3d-fluency-crab.png';
 import { v4 as uuidv4 } from 'uuid';
+import AddEmployee from './components/AddEmployee';
 
 
 function App() {
@@ -56,16 +57,9 @@ function App() {
 
   const showEmployee = true;
   return (
-    <div className="App bg-slate-200">
+    <div className="App bg-slate-200 min-h-screen pt-10">
       {showEmployee ? (
         <>
-          <input type="text" onChange={
-            (e) => {
-              console.log(e.target.value);
-              setRole(e.target.value);
-            }
-
-          } />
           <div className="flex flex-wrap justify-center">
             {employees.map((employee) => {
               return (
@@ -79,7 +73,8 @@ function App() {
                 />
               );
             })}
-            </div> 
+            </div>
+            <AddEmployee />
         </>
       ): (
         <p>You cannot see employees</p>
