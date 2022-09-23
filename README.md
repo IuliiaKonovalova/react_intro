@@ -24,4 +24,22 @@ npx tailwindcss init -p
 
 ```
 
+---
+
+## uuid
+
+```bash
+npm install uuid
+```
+
+---
+
+## React bootstrap
+
+```bash
+npm install react-bootstrap bootstrap
+```
+
+---
+
 
