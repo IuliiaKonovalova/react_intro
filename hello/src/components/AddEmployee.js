@@ -15,7 +15,7 @@ function AddEmployee(props) {
     <>
         <button
           onClick={handleShow}
-          className="mx-auto block px-4 py-1 text-white text-sm bg-purple-600 font-semibold rounded border ring-purple-600 border-purple-600 hover:text-white hover:bg-purple-700 hover:border-transparent">
+          className="mx-auto block mt-6 px-4 py-1 text-white text-sm bg-purple-600 font-semibold rounded border ring-purple-600 border-purple-600 hover:text-white hover:bg-purple-700 hover:border-transparent">
           + Add Employee
         </button>
 
@@ -26,7 +26,7 @@ function AddEmployee(props) {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Update Employee</Modal.Title>
+          <Modal.Title>Add Employee</Modal.Title>
         </Modal.Header>
         <Modal.Body>
 
@@ -49,6 +49,7 @@ function AddEmployee(props) {
                   <input
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="name"
+                    placeholder='Tom Gray'
                     type="text"
                     value={name}
                     onChange={(e) => {
@@ -67,6 +68,26 @@ function AddEmployee(props) {
                   <input
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="role"
+                    placeholder='manager'
+                    type="text"
+                    value={role}
+                    onChange={(e) => {
+                      setRole(e.target.value)
+                    }}
+                    />
+                </div>
+              </div>
+              <div className="md:flex md:items-center mb-6">
+                <div className="md:w-1/3">
+                  <label className="block text-gray-700 text-sm font-bold mb-2" for="img">
+                    Image URL
+                  </label>
+                </div>
+                <div className="md:w-2/3">
+                  <input
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="img"
+                    placeholder='https://google.com'
                     type="text"
                     value={role}
                     onChange={(e) => {
