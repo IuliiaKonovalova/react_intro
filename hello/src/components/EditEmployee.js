@@ -3,8 +3,9 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 function EditEmployee(props) {
-
-
+  const [name, setName] = useState(props.name);
+  const[role, setRole] = useState(props.role);
+  
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -40,8 +41,10 @@ function EditEmployee(props) {
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="name"
                     type="text"
-                    value={props.name}
-                    // onChange={}
+                    value={name}
+                    onChange={(e) => {
+                      setName(e.target.value)
+                    }}
                     />
                 </div>
               </div>
@@ -56,8 +59,10 @@ function EditEmployee(props) {
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="role"
                     type="text"
-                    value={props.role}
-                    // onChange={}
+                    value={role}
+                    onChange={(e) => {
+                      setRole(e.target.value)
+                    }}
                     />
                 </div>
               </div>
