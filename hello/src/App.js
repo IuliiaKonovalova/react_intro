@@ -8,6 +8,7 @@ import image4 from './images/3d-fluency-cherry.png';
 import image5 from './images/3d-fluency-crab.png';
 import { v4 as uuidv4 } from 'uuid';
 import AddEmployee from './components/AddEmployee';
+import EditEmployee from './components/EditEmployee';
 
 
 function App() {
@@ -72,6 +73,13 @@ function App() {
         <>
           <div className="flex flex-wrap justify-center">
             {employees.map((employee) => {
+              const editEmployee = (<EditEmployee
+                id={employee.id}
+                name={employee.name}
+                role={employee.role}
+                updateEmployee={updateEmployee}
+              />
+              );
               return (
                 <Employee
                   key={uuidv4()}
@@ -79,7 +87,7 @@ function App() {
                   name={employee.name}
                   role={employee.role}
                   img={employee.img}
-                  updateEmployee={updateEmployee}
+                  editEmployee={editEmployee}
                 />
               );
             })}
