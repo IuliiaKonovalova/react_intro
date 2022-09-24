@@ -5,6 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 function AddEmployee(props) {
   const [name, setName] = useState('');
   const[role, setRole] = useState('');
+  const[img, setImage] = useState('');
   
   const [show, setShow] = useState(false);
 
@@ -34,8 +35,11 @@ function AddEmployee(props) {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                console.log(props.id, name, role);
-                props.updateEmployee(props.id, name, role);
+                console.log(name, role);
+                setName = ''
+                setRole = ''
+                setImage = ''
+                props.newEmployee(name, role, img);
               }}
               className="w-full max-w-small"
               id="addmodal">
@@ -89,9 +93,9 @@ function AddEmployee(props) {
                     id="img"
                     placeholder='https://google.com'
                     type="text"
-                    value={role}
+                    value={img}
                     onChange={(e) => {
-                      setRole(e.target.value)
+                      setImage(e.target.value)
                     }}
                     />
                 </div>
@@ -101,9 +105,14 @@ function AddEmployee(props) {
 
         </Modal.Body>
         <Modal.Footer>
-          <button className="bg-slate-400 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded" onClick={handleClose}>Cancel</button>
+          <button
+            className="bg-slate-400 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded"
+            onClick={handleClose}>
+              Cancel
+          </button>
           <button
             className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
+            onClick={handleClose}
             form="addmodal">
                 + Add
           </button>
