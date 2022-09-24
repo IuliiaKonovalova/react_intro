@@ -55,7 +55,7 @@ function App() {
     setEmployees(updatedEmployees);
   }
 
-  function NewEmployee(name, role, img) {
+  function newEmployee(name, role, img) {
     newEmployee = {
       id: uuidv4(),
       name: name,
