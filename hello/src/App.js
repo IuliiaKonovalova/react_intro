@@ -6,6 +6,8 @@ import EditEmployee from './components/EditEmployee';
 import Header from './components/Header';
 import Employees from './pages/Employees';
 import Customers from './pages/Customers';
+import Dictionary from './components/Dictionary';
+import Definition from './components/Definition';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
@@ -15,6 +17,9 @@ function App() {
       <Header>
         <Routes>
           <Route path='/employees' element={<Employees />} />
+          <Route path="/dictionary" element={<Dictionary />} />
+          <Route path="/definition" element={<Definition />} />
+          <Route path="/definition/:search" element={<Definition />} />
           <Route path='/customers' element={<Customers />} />
         </Routes>
       </Header>
