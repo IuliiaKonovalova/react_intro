@@ -3,8 +3,9 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-function Header() {
+function Header(props) {
   return (
+    <div className='bg-slate-200'>
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
         <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
@@ -34,6 +35,8 @@ function Header() {
         </Navbar.Collapse>
       </Container>
     </Navbar>
+  {props.children}
+  </div>
   );
 }
 
