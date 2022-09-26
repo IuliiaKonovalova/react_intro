@@ -9,7 +9,6 @@ import image5 from '../images/3d-fluency-crab.png';
 import { v4 as uuidv4 } from 'uuid';
 import AddEmployee from '../components/AddEmployee';
 import EditEmployee from '../components/EditEmployee';
-import Header from '../components/Header';
 
 function Employees() {
   const [ role, setRole ] = useState();
@@ -71,7 +70,7 @@ function Employees() {
     <div className="App bg-slate-200 min-h-screen">
       {showEmployee ? (
         <>
-          <div className="flex mt-8 flex-wrap justify-center">
+          <div className="flex pt-8 flex-wrap justify-center">
             {employees.map((employee) => {
               const editEmployee = (<EditEmployee
                 id={employee.id}
