@@ -9,6 +9,7 @@ import Customers from './pages/Customers';
 import Dictionary from './components/Dictionary';
 import Definition from './components/Definition';
 import NotFound from './components/404';
+import NoResults from './components/NoResults';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
@@ -23,6 +24,7 @@ function App() {
           <Route path='/customers' element={<Customers />} />
           <Route path='/404' element={<NotFound />} />
           <Route path='*' element={<NotFound />} />
+          <Route path='/NoResults' element={<NoResults />} />
         </Routes>
       </Header>
     </BrowserRouter>
