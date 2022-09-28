@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Link } from "react-router-dom";
 import NotFound from "../components/404";
 import NoResults from "../components/NoResults";
+import DefinitionSearch from "../components/DefinitionSearch"
 
 export default function Definition() {
 
@@ -47,7 +48,6 @@ export default function Definition() {
     return (
       <>
       <NoResults />
-      
       </>
     )
   }
@@ -57,7 +57,7 @@ export default function Definition() {
       {word
         ? 
         <div className="App bg-slate-200 min-h-screen max-w-120rem flex pt-8 flex-wrap flex-column text-center">
-          <Link to ='/dictionary'>Search another word</Link>
+            <DefinitionSearch />
           <div className="flex flex-wrap flex-column justify-center mt-8">
         {word.map((meaning) => { 
           return (
