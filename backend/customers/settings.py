@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 
 
-import dj_database_url
+# import dj_database_url
 # import django_heroku
 
 if os.path.exists('env.py'):
@@ -43,6 +43,8 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
+    'customers',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
