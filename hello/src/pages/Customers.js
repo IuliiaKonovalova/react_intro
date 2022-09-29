@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import { Link } from "react-router-dom";
 
 export default function Customers() {
   const [customers, setCustomers] = useState([]);
@@ -8,8 +8,8 @@ export default function Customers() {
     fetch('http://localhost:8000/api/customers/')
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.data);
-        setCustomers(data.data);
+        console.log(data.customers);
+        setCustomers(data.customers);
       }
       );
   }, []);
@@ -22,7 +22,7 @@ export default function Customers() {
       <div className='flex flex-wrap justify-center flex-col mt-8'>
         {customers ? customers.map((customer) => {
           console.log("Customer", customer);
-          return <p className="text-center p-2 mb-2 bg-white">{customer.name}</p>
+          return <Link to={"/customers/" + customer.id} className="text-center p-2 mb-2 bg-white">{customer.name}</Link>
         }) : null}
       </div>
     </div>
