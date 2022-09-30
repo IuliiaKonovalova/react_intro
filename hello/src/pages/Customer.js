@@ -1,5 +1,6 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { baseUrl } from "../shared";
 
 
 export default function Customer() {
@@ -11,7 +12,7 @@ export default function Customer() {
   useEffect(() => {
     console.log('use effect here for customers details');
 
-    const url = `http://localhost:8000/api/customers/${id}`;
+    const url = baseUrl + `api/customers/${id}`;
 
     fetch(url)
       .then((res) => {
