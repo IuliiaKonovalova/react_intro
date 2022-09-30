@@ -22,7 +22,7 @@ export default function Customers() {
       <div className='flex flex-wrap justify-center flex-col mt-8'>
         {customers ? customers.map((customer) => {
           console.log("Customer", customer);
-          return <Link to={"/customers/" + customer.id} className="text-center p-2 mb-2 bg-white">{customer.name}</Link>
+          return <Link to={"/customer/" + customer.id} className="text-center p-2 mb-2 bg-white">{customer.name}</Link>
         }) : null}
       </div>
     </div>
