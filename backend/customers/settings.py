@@ -67,7 +67,17 @@ MIDDLEWARE = [
 ]
 
 
-CORS_ALLOWED_ORIGINS = ['http://localhost:3000', 'https://localhost:3000']
+APPEND_SLASH = True
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework_simplejwt.authentication.JWTAuthentication',)
+# }
+
+REST_FRAMEWORK = {
+    'EXCEPTION_HANDLER': 'rest_framework.views.exception_handler'
+}
+
+CORS_ALLOWED_ORIGINS = ['http://localhost:3000', 'http://localhost:3001']
 
 ROOT_URLCONF = "customers.urls"
 
