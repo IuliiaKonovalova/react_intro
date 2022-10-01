@@ -12,14 +12,14 @@ export default function Customer() {
   useEffect(() => {
     console.log('use effect here for customers details');
 
-    const url = baseUrl + `api/customers/${id}`;
+
+    const url = baseUrl + 'api/customers/' + id;
 
     fetch(url)
       .then((res) => {
         if (res.status === 404) {
           // navigate('/404');
           setNotFound(true);
-        } else if (res.status === 405) {
         } else if (!res.ok) {
           throw Error('could not fetch the data for that resource');
         }
@@ -32,7 +32,7 @@ export default function Customer() {
   return (
     <>
       {notFound ? <h1>Customer with id {id } not found</h1> : null }
-      <div className="App bg-slate-200 min-h-screen  max-w-120rem p-8 flex pt-8 flex-wrap justify-center">
+      <div className="App bg-slate-200 min-h-screen  max-w-120rem p-8 flex pt-8 flex-wrap justify-center flex-col content-center">
         {customer?.id ? 
           <div className="bg-white rounded-lg shadow-lg h-40 max-h-full p-8 m-4 max-w-sm w-full flex flex-col text-center justify-center">
             <div
@@ -49,6 +49,10 @@ export default function Customer() {
             </div>
           </div>
         : null}
+
+        <Link to="/customers" className=" text-blue hover:text-purple-500 font-bold py-2 px-4 rounded text-center">
+          Go Back
+        </Link>
       </div>
     </>
 
