@@ -50,10 +50,13 @@ export default function Customer() {
           </div>
         : null}
         <button
+          className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
           onClick={() => {
             console.log('Delete clicking...');
             const url = baseUrl + 'api/customers/' + id;
-            fetch(url, {method: 'DELETE'}).then((response) => {
+            fetch(url, {method: 'DELETE', headers: {
+              'Content-Type': 'application/json'
+            }}).then((response) => {
               if (!response.ok) {
                 throw Error('Something went wrong! Could not delete the data for that resource');
               }
