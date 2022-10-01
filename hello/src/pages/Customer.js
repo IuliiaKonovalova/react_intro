@@ -34,18 +34,30 @@ export default function Customer() {
       {notFound ? <h1>Customer with id {id } not found</h1> : null }
       <div className="App bg-slate-200 min-h-screen  max-w-120rem p-8 flex pt-8 flex-wrap justify-center flex-col content-center">
         {customer?.id ? 
-          <div className="bg-white rounded-lg shadow-lg h-40 max-h-full p-8 m-4 max-w-sm w-full flex flex-col text-center justify-center">
+          <div className="bg-white rounded-lg shadow-lg  max-h-full p-10 m-4 max-w-sm w-full flex flex-col text-center justify-center">
             <div
-              className="bg-cover bg-center w-40 rounded-full mx-auto ">
-                <span className="font-bold">ID:</span> {customer.id}
+              className="bg-cover bg-center w-60 rounded-full mx-auto mb-3">
+                <span className="font-bold">ID:</span> 
+                <input 
+                  className="bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  type='text'
+                  value={customer.id} />
             </div> 
             <div
-              className="bg-cover bg-center w-40 rounded-full mx-auto ">
-                <span className="font-bold">Name:</span> {customer.name}
+              className="bg-cover bg-center w-60 rounded-full mx-auto mb-4">
+                <span className="font-bold">Name:</span>
+                <input 
+                  className="bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  type='text'
+                  value={customer.name} />
             </div> 
             <div
-              className="bg-cover bg-center w-40 rounded-full mx-auto ">
-                <span className="font-bold">Industry:</span> {customer.industry}
+              className="bg-cover bg-center w-60 rounded-full mx-auto mb-3">
+                <span className="font-bold">Industry:</span>
+                <input
+                  className="bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  type='text'
+                  value={customer.name} />
             </div>
           </div>
         : null}
