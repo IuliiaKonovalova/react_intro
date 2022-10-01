@@ -49,6 +49,25 @@ export default function Customer() {
             </div>
           </div>
         : null}
+        <button
+          onClick={() => {
+            console.log('Delete clicking...');
+            const url = baseUrl + 'api/customers/' + id;
+            fetch(url, {method: 'DELETE'}).then((response) => {
+              if (!response.ok) {
+                throw Error('Something went wrong! Could not delete the data for that resource');
+              }
+              // assume thing went well
+              navigate('/customers');
+            }).catch((error) => {
+              console.log(error);
+            }
+            );
+
+          }}
+        >
+          Delete
+        </button>
 
         <Link to="/customers" className=" text-blue hover:text-purple-500 font-bold py-2 px-4 rounded text-center">
           Go Back
