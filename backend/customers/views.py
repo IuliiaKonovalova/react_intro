@@ -8,6 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 
 
 @api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
 def customers(request):
     if request.method == 'GET':
         data = Customer.objects.all()
@@ -29,6 +30,7 @@ def customers(request):
 
 
 @api_view(['GET', 'POST', 'DELETE'])
+@permission_classes([IsAuthenticated])
 def customer(request, id):
     try:
         print(id)
