@@ -18,10 +18,16 @@ export default function Customer() {
 
 
   useEffect(() => {
-    console.log('customer', customer);
-    console.log('tempCustomer', tempCustomer);
-    console.log('changed', changed);
-  }, );
+    if (!customer?.name) return;
+    if (!customer?.industry) return;
+
+    let equal = true;
+    if (customer.name !== tempCustomer.name) equal = false;
+    if (customer.industry !== tempCustomer.industry) equal = false;
+
+    if (equal) setChanged(false);
+  
+  });
 
 
 
@@ -46,7 +52,7 @@ export default function Customer() {
         setCustomer(data.customer);
         setTempCustomer(data.customer);
       })
-  }, []);
+  }, [id]);
 
   function updateCustomer() {
     console.log('update customer');
@@ -71,6 +77,8 @@ export default function Customer() {
       })
   }
 
+
+
   return (
     <>
       {notFound ? <h1>Customer with id {id } not found</h1> : null }
@@ -93,7 +101,7 @@ export default function Customer() {
                   value={tempCustomer.name}
                   onChange={(e) => {
                     setChanged(true);
-                    setTempCustomer({...tempCustomer, name: e.target.value})
+                    setTempCustomer({...tempCustomer, name: e.target.value});
                   }} />
             </div> 
             <div
@@ -105,7 +113,8 @@ export default function Customer() {
                   value={tempCustomer.industry}
                   onChange={(e) => {
                     setChanged(true);
-                    setTempCustomer({...tempCustomer, industry: e.target.value})
+                    setTempCustomer({...tempCustomer, industry: e.target.value});
+
                   }} />
             </div>
             {changed ?
