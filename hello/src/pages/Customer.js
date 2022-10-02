@@ -1,11 +1,18 @@
-import { useParams, Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
 import { baseUrl } from "../shared";
+import { LoginContext } from "../App";
 
 
 export default function Customer() {
 
+
+  const [loggedIn, setLoggedIn] = useContext(LoginContext);
+
   const { id } = useParams();
+
+  const location = useLocation();
+
   const navigate = useNavigate();
 
   const [customer, setCustomer] = useState([]);
@@ -17,6 +24,7 @@ export default function Customer() {
   const [changed, setChanged] = useState(false);
 
   const [error, setError] = useState();
+
 
 
   useEffect(() => {
@@ -40,11 +48,23 @@ export default function Customer() {
 
     const url = baseUrl + 'api/customers/' + id;
 
-    fetch(url)
+    fetch(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('access')
+      }
+    })
       .then((res) => {
         if (res.status === 404) {
           // navigate('/404');
           setNotFound(true);
+        } else if (res.status === 401) {
+            setLoggedIn(false);
+            navigate('/login', {
+            state: {
+              previousUrl: location.pathname,
+            }
+          });
         } else if (!res.ok) {
           throw Error('could not fetch the data for that resource');
         }
@@ -68,10 +88,20 @@ export default function Customer() {
 
     fetch(url, {
       method: 'POST',
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('access')
+      },
       body: JSON.stringify(tempCustomer)
     })
       .then((res) => {
+        if (res.status === 401) {
+          navigate('/login', {
+            state: {
+              previousUrl: location.pathname,
+            }
+          });
+        }
         if (!res.ok) {
           throw Error('could not fetch the data for that resource');
         }
@@ -100,6 +130,7 @@ export default function Customer() {
             id='customer'
             onSubmit={updateCustomer}
             className="bg-white rounded-lg shadow-lg  max-h-full p-10 m-4 max-w-sm w-full flex flex-col text-center justify-center">
+            <h1 className="text-2xl font-bold text-gray-900">Edit Customer Details</h1>
             <div
               className="bg-cover bg-center w-60 rounded-full mx-auto mb-2">
                 <span className="font-bold">ID:</span> 
@@ -164,9 +195,17 @@ export default function Customer() {
               onClick={() => {
                 console.log('Delete clicking...');
                 const url = baseUrl + 'api/customers/' + id;
-                fetch(url, {method: 'DELETE', headers: {
-                  'Content-Type': 'application/json'
-                }}).then((response) => {
+                fetch(url, {
+                  method: 'DELETE',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: 'Bearer ' + localStorage.getItem('access')
+                  }
+                })
+                .then((response) => {
+                  if (response.status === 401) {
+                    navigate('/login');
+                  }
                   if (!response.ok) {
                     throw Error('Something went wrong! Could not delete the data for that resource');
                   }
