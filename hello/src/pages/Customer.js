@@ -16,6 +16,8 @@ export default function Customer() {
 
   const [changed, setChanged] = useState(false);
 
+  const [error, setError] = useState();
+
 
   useEffect(() => {
     if (!customer?.name) return;
@@ -51,6 +53,10 @@ export default function Customer() {
       .then((data) => {
         setCustomer(data.customer);
         setTempCustomer(data.customer);
+        setError(undefined);
+      })
+      .catch((err) => {
+        setError(err.message);
       })
   }, [id]);
 
@@ -74,7 +80,12 @@ export default function Customer() {
         setCustomer(data.customer);
         setTempCustomer(data.customer);
         setChanged(false);
+        setError(undefined);
       })
+      .catch((err) => {
+        setError(err.message);
+      }
+      )
   }
 
 
@@ -164,12 +175,12 @@ export default function Customer() {
               Delete
             </button>
           : null}
+          {error ? <div>{error}</div> : null}
           <Link to="/customers" className=" text-blue hover:text-purple-500 font-bold py-2 px-4 text-center">
             Go Back
           </Link>
         </div>
       </div>
     </>
-
   )
 }
