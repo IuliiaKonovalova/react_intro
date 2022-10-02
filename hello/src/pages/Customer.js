@@ -4,11 +4,28 @@ import { baseUrl } from "../shared";
 
 
 export default function Customer() {
+
+  const { id } = useParams();
+  const navigate = useNavigate();
+
   const [customer, setCustomer] = useState([]);
+
+  const [tempCustomer, setTempCustomer] = useState()
+
   const [notFound, setNotFound] = useState(false);
 
-  const navigate = useNavigate();
-  const { id } = useParams();
+  const [changed, setChanged] = useState(false);
+
+
+  useEffect(() => {
+    console.log('customer', customer);
+    console.log('tempCustomer', tempCustomer);
+    console.log('changed', changed);
+  }, );
+
+
+
+
   useEffect(() => {
     console.log('use effect here for customers details');
 
@@ -27,6 +44,7 @@ export default function Customer() {
       })
       .then((data) => {
         setCustomer(data.customer);
+        setTempCustomer(data.customer);
       })
   }, []);
   return (
@@ -38,10 +56,9 @@ export default function Customer() {
             <div
               className="bg-cover bg-center w-60 rounded-full mx-auto mb-3">
                 <span className="font-bold">ID:</span> 
-                <input 
-                  className="bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                  type='text'
-                  value={customer.id} />
+                <p 
+                  className="appearance-none border-2 border-gray-200 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  >{tempCustomer.id} </p>
             </div> 
             <div
               className="bg-cover bg-center w-60 rounded-full mx-auto mb-4">
@@ -49,7 +66,11 @@ export default function Customer() {
                 <input 
                   className="bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                   type='text'
-                  value={customer.name} />
+                  value={tempCustomer.name}
+                  onChange={(e) => {
+                    setChanged(true);
+                    setTempCustomer({...tempCustomer, name: e.target.value})
+                  }} />
             </div> 
             <div
               className="bg-cover bg-center w-60 rounded-full mx-auto mb-3">
@@ -57,8 +78,15 @@ export default function Customer() {
                 <input
                   className="bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                   type='text'
-                  value={customer.name} />
+                  value={tempCustomer.industry}
+                  onChange={(e) => {
+                    setChanged(true);
+                    setTempCustomer({...tempCustomer, industry: e.target.value})
+                  }} />
             </div>
+            {changed ?
+              <p>changed</p>
+            : null}
           </div>
         : null}
         <button
