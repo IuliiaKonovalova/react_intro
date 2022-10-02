@@ -141,29 +141,29 @@ export default function Customer() {
         : null}
         <div
           className="bg-cover bg-center w-70 r mx-auto mb-4">
-          <button
-            className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            onClick={() => {
-              console.log('Delete clicking...');
-              const url = baseUrl + 'api/customers/' + id;
-              fetch(url, {method: 'DELETE', headers: {
-                'Content-Type': 'application/json'
-              }}).then((response) => {
-                if (!response.ok) {
-                  throw Error('Something went wrong! Could not delete the data for that resource');
+          {customer?.id ? 
+            <button
+              className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              onClick={() => {
+                console.log('Delete clicking...');
+                const url = baseUrl + 'api/customers/' + id;
+                fetch(url, {method: 'DELETE', headers: {
+                  'Content-Type': 'application/json'
+                }}).then((response) => {
+                  if (!response.ok) {
+                    throw Error('Something went wrong! Could not delete the data for that resource');
+                  }
+                  // assume thing went well
+                  navigate('/customers');
+                }).catch((error) => {
+                  console.log(error);
                 }
-                // assume thing went well
-                navigate('/customers');
-              }).catch((error) => {
-                console.log(error);
-              }
-              );
-
-            }}
-          >
-            Delete
-          </button>
-
+                );
+              }}
+            >
+              Delete
+            </button>
+          : null}
           <Link to="/customers" className=" text-blue hover:text-purple-500 font-bold py-2 px-4 text-center">
             Go Back
           </Link>
