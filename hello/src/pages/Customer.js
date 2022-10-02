@@ -60,7 +60,8 @@ export default function Customer() {
       })
   }, [id]);
 
-  function updateCustomer() {
+  function updateCustomer(e) {
+    e.preventDefault();
     console.log('update customer');
     console.log('OD', id);
     const url = baseUrl + 'api/customers/' + id + '/';
@@ -95,21 +96,25 @@ export default function Customer() {
       {notFound ? <h1>Customer with id {id } not found</h1> : null }
       <div className="App bg-slate-200 min-h-screen  max-w-120rem p-8 flex pt-8 flex-wrap justify-center flex-col content-center">
         {customer?.id ? 
-          <div className="bg-white rounded-lg shadow-lg  max-h-full p-10 m-4 max-w-sm w-full flex flex-col text-center justify-center">
+          <form
+            id='customer'
+            onSubmit={updateCustomer}
+            className="bg-white rounded-lg shadow-lg  max-h-full p-10 m-4 max-w-sm w-full flex flex-col text-center justify-center">
             <div
-              className="bg-cover bg-center w-60 rounded-full mx-auto mb-3">
+              className="bg-cover bg-center w-60 rounded-full mx-auto mb-2">
                 <span className="font-bold">ID:</span> 
                 <p 
                   className="appearance-none border-2 border-gray-200 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                   >{tempCustomer.id} </p>
             </div> 
             <div
-              className="bg-cover bg-center w-60 rounded-full mx-auto mb-4">
-                <span className="font-bold">Name:</span>
+              className="bg-cover bg-center w-60 rounded-full mx-auto mb-3">
+                <label className="font-bold" for='name'>Name:</label>
                 <input 
                   className="bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                   type='text'
                   value={tempCustomer.name}
+                  id='name'
                   onChange={(e) => {
                     setChanged(true);
                     setTempCustomer({...tempCustomer, name: e.target.value});
@@ -117,8 +122,9 @@ export default function Customer() {
             </div> 
             <div
               className="bg-cover bg-center w-60 rounded-full mx-auto mb-3">
-                <span className="font-bold">Industry:</span>
+                <label className="font-bold" for='industry'>Industry:</label>
                 <input
+                  id='industry'
                   className="bg-gray-100 appearance-none border-2 border-gray-200 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                   type='text'
                   value={tempCustomer.industry}
@@ -132,7 +138,7 @@ export default function Customer() {
               <div
                 className="bg-cover bg-center w-60 rounded-full mx-auto mb-4">
                 <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-black focus:shadow-outline"
                   onClick={(e) => {
                     setChanged(false);
                     setTempCustomer({...customer});
@@ -140,7 +146,7 @@ export default function Customer() {
                     Cancel
                 </button>
                 <button
-                  className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2"
+                  className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-black focus:shadow-outline ml-2"
                   onClick=
                     {updateCustomer}
                   >
@@ -148,13 +154,13 @@ export default function Customer() {
                 </button>
               </div>
             : null}
-          </div>
+          </form>
         : null}
         <div
           className="bg-cover bg-center w-70 r mx-auto mb-4">
           {customer?.id ? 
             <button
-              className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-black focus:shadow-outline"
               onClick={() => {
                 console.log('Delete clicking...');
                 const url = baseUrl + 'api/customers/' + id;
