@@ -47,6 +47,30 @@ export default function Customer() {
         setTempCustomer(data.customer);
       })
   }, []);
+
+  function updateCustomer() {
+    console.log('update customer');
+    console.log('OD', id);
+    const url = baseUrl + 'api/customers/' + id + '/';
+
+    fetch(url, {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(tempCustomer)
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw Error('could not fetch the data for that resource');
+        }
+        return res.json()
+      })
+      .then((data) => {
+        setCustomer(data.customer);
+        setTempCustomer(data.customer);
+        setChanged(false);
+      })
+  }
+
   return (
     <>
       {notFound ? <h1>Customer with id {id } not found</h1> : null }
@@ -85,7 +109,21 @@ export default function Customer() {
                   }} />
             </div>
             {changed ?
-              <p>changed</p>
+              <>
+                <button
+                  onClick={(e) => {
+                    setChanged(false);
+                    setTempCustomer({...customer});
+                  }}>
+                    cancel
+                </button>
+                <button
+                  onClick=
+                    {updateCustomer}
+                  >
+                    Save
+                </button>
+              </>
             : null}
           </div>
         : null}
