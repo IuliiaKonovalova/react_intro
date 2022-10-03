@@ -56,12 +56,22 @@ export default function Navbar(props) {
                       </NavLink>
 
                     ))}
-                      <NavLink
-                        to={loggedIn ? '/logout' : '/login'}
-                        className="px-3 py-2 rounded-md text-sm font-medium no-underline text-gray-300 hover:bg-gray-700 hover:text-white"
-                      >
-                        {loggedIn ? 'Logout' : 'Login'}
-                      </NavLink>
+                      { loggedIn ?
+                        <NavLink
+                          to={'#'}
+
+                          className="px-3 py-2 rounded-md text-sm font-medium no-underline text-gray-300 hover:bg-gray-700 hover:text-white"
+                        >
+                          Logout
+                        </NavLink>
+                      :
+                        <NavLink
+                          to={'/login'}
+                          className="px-3 py-2 rounded-md text-sm font-medium no-underline text-gray-300 hover:bg-gray-700 hover:text-white"
+                        >
+                          Login
+                        </NavLink>
+                      }
                   </div>
                 </div>
               </div>
