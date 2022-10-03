@@ -1,7 +1,8 @@
-import { Fragment } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
+import { useContext } from "react";
+import { Disclosure } from "@headlessui/react";
+import { BellIcon, MenuIcon } from "@heroicons/react/outline";
 import { NavLink } from "react-router-dom";
+import { LoginContext } from "../App";
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -9,10 +10,15 @@ const navigation = [
   { name: 'Customers', href: '/Customers'},
   { name: 'Dictionary', href: '/Dictionary' },
 ]
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
+
 export default function Navbar(props) {
+
+  const [loggedIn, setLoggedIn] = useContext(LoginContext);
+
   return (
     <>
     <Disclosure as="nav" className="bg-gray-800">
@@ -48,7 +54,14 @@ export default function Navbar(props) {
                       >
                         {item.name}
                       </NavLink>
+
                     ))}
+                      <NavLink
+                        to={loggedIn ? '/logout' : '/login'}
+                        className="px-3 py-2 rounded-md text-sm font-medium no-underline text-gray-300 hover:bg-gray-700 hover:text-white"
+                      >
+                        {loggedIn ? 'Logout' : 'Login'}
+                      </NavLink>
                   </div>
                 </div>
               </div>
@@ -79,6 +92,12 @@ export default function Navbar(props) {
                   {item.name}
                 </Disclosure.Button>
               ))}
+              <NavLink
+                to={loggedIn ? '/logout' : '/login'}
+                  className="px-3 py-2 rounded-md text-sm font-medium no-underline text-gray-300 hover:bg-gray-700 hover:text-white"
+                >
+                {loggedIn ? 'Logout' : 'Login'}
+              </NavLink>
             </div>
           </Disclosure.Panel>
         </>
