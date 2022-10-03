@@ -15,8 +15,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 export const LoginContext = createContext();
 
 function App() {
+  // check localStorage for an access token --> may be expired
+  const [loggedIn, setLoggedIn] = useState(localStorage.access ? true : false);
+  // long term goal --> use Refresh token and if is works, stay logged in, otherwise, log out and send to login page
 
-  const [loggedIn, setLoggedIn] = useState(false);
+
 
   return (
     <LoginContext.Provider value={[loggedIn, setLoggedIn]}>
