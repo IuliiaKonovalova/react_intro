@@ -59,7 +59,11 @@ export default function Navbar(props) {
                       { loggedIn ?
                         <NavLink
                           to={'#'}
-
+                          onClick={() => {
+                            console.log('logging out...');
+                            setLoggedIn(false);
+                            localStorage.clear();
+                          }}
                           className="px-3 py-2 rounded-md text-sm font-medium no-underline text-gray-300 hover:bg-gray-700 hover:text-white"
                         >
                           Logout
@@ -102,12 +106,26 @@ export default function Navbar(props) {
                   {item.name}
                 </Disclosure.Button>
               ))}
-              <NavLink
-                to={loggedIn ? '/logout' : '/login'}
-                  className="px-3 py-2 rounded-md text-sm font-medium no-underline text-gray-300 hover:bg-gray-700 hover:text-white"
+              { loggedIn ?
+                <NavLink
+                  to={'#'}
+                  onClick={() => {
+                    console.log('logging out...');
+                    setLoggedIn(false);
+                    localStorage.clear();
+                  }}
+                  className="px-3 py-2 rounded-md font-medium no-underline text-gray-300 hover:bg-gray-700 hover:text-white"
                 >
-                {loggedIn ? 'Logout' : 'Login'}
-              </NavLink>
+                  Logout
+                </NavLink>
+              :
+                <NavLink
+                  to={'/login'}
+                  className="px-3 py-2 rounded-md font-medium no-underline text-gray-300 hover:bg-gray-700 hover:text-white"
+                >
+                  Login
+                </NavLink>
+              }
             </div>
           </Disclosure.Panel>
         </>
