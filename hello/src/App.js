@@ -19,10 +19,17 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(localStorage.access ? true : false);
   // long term goal --> use Refresh token and if is works, stay logged in, otherwise, log out and send to login page
 
+  function changedLoggedIn(value) {
+    setLoggedIn(value);
+    if (value === false) {
+      localStorage.clear();
+      // if there are setting for the things like dark mode, clear only access token
+    }
+  }
 
 
   return (
-    <LoginContext.Provider value={[loggedIn, setLoggedIn]}>
+    <LoginContext.Provider value={[loggedIn, changedLoggedIn]}>
       <BrowserRouter>
         <Header>
           <Routes>
