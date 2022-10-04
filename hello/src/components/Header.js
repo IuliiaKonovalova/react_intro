@@ -58,7 +58,7 @@ export default function Navbar(props) {
                     ))}
                       { loggedIn ?
                         <NavLink
-                          to={'#'}
+                          to={'/login'}
                           onClick={() => {
                             console.log('logging out...');
                             setLoggedIn(false);
