@@ -5,57 +5,40 @@ import { Link } from "react-router-dom";
 import NotFound from "../components/404";
 import NoResults from "../components/NoResults";
 import DefinitionSearch from "../components/DefinitionSearch"
+import useFetch from "../hooks/UseFetch";
 
 export default function Definition() {
-
-  const [word, setWord] = useState("");
-  const [notFound, setNotFound] = useState(false);
-  const [error, setError] = useState(false);
+  //const [word, setWord] = useState();
+  //const [notFound, setNotFound] = useState(false);
+  //const [error, setError] = useState(false);
   let { search } = useParams();
 
   const location = useLocation();
   const navigate = useNavigate();
+  const { request, data: [{ meanings: word }] = [{}], errorStatus } = useFetch(
+      'https://api.dictionaryapi.dev/api/v2/entries/en/' + search
+  );
 
   useEffect(() => {
-    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${search}`)
-      .then((response) => {
-        if (response.status === 404) {
-          setNotFound(true);
-        } else if (response.status === 401) {
-          navigate("/login", {
-            state: {
-              previousUrl: location.pathname,
-            }
-          });
-        } else if (response.status === 500) {
-          // setServerError(true);
-        }
-        if (!response.ok) {
-          setError(true);
-
-          throw new Error("Something went wrong");
-        }
-        return response.json();
-        // response.json()
-
-      }
-      )
-      .then((data) => {
-        setWord(data[0].meanings);
-      }
-      )
-      .catch((error) => {
-        console.log(error.message);
-      }
-      );
+    request();
   }, []);
 
-  if (notFound === true) {
-    return (
-      <>
-      <NoResults />
-      </>
-    )
+  if (errorStatus === 404) {
+      return (
+          <>
+              <NotFound />
+              <Link to="/dictionary">Search another</Link>
+          </>
+      );
+  }
+
+  if (errorStatus) {
+      return (
+          <>
+              <p>There was a problem with the server, try again later.</p>
+              <Link to="/dictionary">Search another</Link>
+          </>
+      );
   }
 
   return (
