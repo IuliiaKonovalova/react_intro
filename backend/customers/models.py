@@ -9,3 +9,11 @@ class Customer(models.Model):
     def __str__(self):
         return self.name
 
+
+class Order(models.Model):
+    customer = models.ForeignKey(Customer, related_name="orders", on_delete=models.CASCADE)
+    description = models.CharField(max_length=500)
+    total_in_cents = models.IntegerField()
+
+    def __str__(self):
+        return self.customer.name + " - " + self.description
